@@ -20,11 +20,21 @@ brew install sjwasko/tui-do/tui-do
 prebuilt binary, which takes a few minutes the first time: it fetches and builds the whole
 dependency tree, and SQLite is compiled from source by `rusqlite`'s `bundled` feature.
 
-That is slower than pouring a bottle and it is the right trade on macOS today. A binary
-downloaded over the network carries the `com.apple.quarantine` attribute, so Gatekeeper
-refuses to run it with *"the developer cannot be verified"* unless it has been signed and
-notarised with a paid Apple Developer account. Something built locally never acquires the
-attribute, so the problem does not arise rather than being worked around.
+**It is not free, and the original reason given for it was wrong.** On a clean Mac the
+build dependencies are `llvm` (9,059 files, 1.6 GB) and `rust` (7,328 files, 432 MB), plus
+`libgit2` — roughly 2 GB fetched to produce an 11 MB binary. `brew uninstall tui-do` does
+not reclaim that; `brew autoremove` does.
+
+This README used to justify the cost by saying a downloaded binary is quarantined by
+Gatekeeper. **Measured on a Mac on 2026-09-07, that is not so**: a release asset fetched
+with `curl` carries no extended attributes at all, because quarantine is set by the
+downloading application opting into it. Browsers do; `curl` does not — which is also why
+`brew install` of a bottled formula never prompts.
+
+What is still true is smaller: a browser download *is* quarantined, and an arm64 binary
+must be signed to run at all, though ad-hoc signing is enough and the Rust toolchain does
+it while linking. A prebuilt macOS binary is therefore likely the better default, and this
+tap will pour one once the release workflow builds it.
 
 Homebrew installs the Xcode Command Line Tools it needs, so the C toolchain that
 `bundled` SQLite requires is already handled.

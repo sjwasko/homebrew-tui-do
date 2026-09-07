@@ -1,10 +1,21 @@
 # Homebrew formula for tui-do.
 #
-# Builds from source deliberately, rather than pouring a downloaded binary. A binary
-# fetched over the network carries the com.apple.quarantine attribute, so Gatekeeper
-# refuses it with "the developer cannot be verified" unless it is signed and notarised,
-# which needs a paid Apple Developer account. Something compiled locally never acquires
-# the attribute at all, so the problem does not arise instead of being solved.
+# Builds from source, and the reason first given for that was wrong.
+#
+# This comment used to say a downloaded binary carries com.apple.quarantine, so Gatekeeper
+# would refuse it unless signed and notarised. Measured on a Mac 2026-09-07: a release
+# asset fetched with `curl` has *no* extended attributes at all. Quarantine is applied by
+# the downloading application opting into it -- browsers do, curl does not -- which is
+# also why `brew install` of any bottled formula never trips Gatekeeper.
+#
+# What remains true is narrower: someone who downloads from the releases page in a
+# *browser* is quarantined, and an arm64 binary must be signed to execute at all, though
+# ad-hoc signing suffices and the Rust toolchain does that while linking.
+#
+# So building from source is not buying as much as claimed, and it is not free: on a clean
+# Mac it pulls llvm (1.6 GB) and rust (432 MB) as build dependencies to produce an 11 MB
+# binary. Shipping aarch64-apple-darwin in the release workflow and pouring it is probably
+# the better default; this formula stays source-built only until that exists.
 class TuiDo < Formula
   desc "Fast, local-first terminal client for Vikunja"
   homepage "https://github.com/sjwasko/tui-do"
