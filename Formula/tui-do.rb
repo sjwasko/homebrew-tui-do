@@ -8,8 +8,8 @@
 class TuiDo < Formula
   desc "Fast, local-first terminal client for Vikunja"
   homepage "https://github.com/sjwasko/tui-do"
-  url "https://github.com/sjwasko/tui-do/archive/refs/tags/v1.0.0.tar.gz"
-  sha256 "818e2538e75438bc8cc2bf35f854f58c9570361950160b38aab9f43084f067de"
+  url "https://github.com/sjwasko/tui-do/archive/refs/tags/v1.0.1.tar.gz"
+  sha256 "1788125fabe9ae7525b19405bf375be14f117ded3d0d95461f3e565209bd536e"
   license any_of: ["MIT", "Apache-2.0"]
   head "https://github.com/sjwasko/tui-do.git", branch: "main"
 
