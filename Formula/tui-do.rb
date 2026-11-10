@@ -18,9 +18,9 @@
 class TuiDo < Formula
   desc "Fast, local-first terminal client for Vikunja"
   homepage "https://github.com/sjwasko/tui-do"
-  url "https://github.com/sjwasko/tui-do/releases/download/v1.2.1/tui-do-v1.2.1-aarch64-apple-darwin.tar.gz"
-  version "1.2.1"
-  sha256 "c01f52ecada228b5824bb754c785bc74ba5fa6d623f9e2b5e4bccbba9b5b8bb8"
+  url "https://github.com/sjwasko/tui-do/releases/download/v1.2.2/tui-do-v1.2.2-aarch64-apple-darwin.tar.gz"
+  version "1.2.2"
+  sha256 "24ef71376fbb881cf4a6c6b4f0dec7f5b538836bd1104a444428b8c85a3a7079"
   license any_of: ["MIT", "Apache-2.0"]
 
   depends_on arch: :arm64
